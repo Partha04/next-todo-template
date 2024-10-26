@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TODO App
 
-## Getting Started
+A simple TODO app built using modern web technologies and following best practices like SOLID principles and Test-Driven Development (TDD).
 
-First, run the development server:
+---
+
+## Tech Stack:
+
+- **Frontend:** TypeScript, React, NEXT.js, React-query
+- **Backend:** Drizzle ORM, PostgreSQL
+- **Testing:** Jest, React-testing-library, Cypress
+- **CI/CD:** GitHub Actions
+- **Containerization:** Docker, docker-compose
+
+---
+
+## Project Setup Instructions
+
+### 1. Prerequisites
+
+- Docker: Install Docker and Docker Compose on your system.
+- Node.js: Ensure Node.js (v16 or higher) is installed.
+- PostgreSQL: Install PostgreSQL if not using Docker for the database.
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/todo-app.git
+cd todo-app
+```
+
+### 3. Environment Variables
+
+Create a `.env` file in the root directory with the following:
+
+```bash
+DATABASE_URL=postgres://user:password@localhost:5432/tododb
+```
+
+### 4. Setup Docker and Database
+
+Build and run the containers:
+
+```bash
+docker-compose up --build
+```
+
+This will:
+
+- Start the PostgreSQL database.
+- Launch the Next.js app with React in development mode.
+
+To check database connection:
+
+```bash
+docker exec -it todo-app_db psql -U user -d tododb
+```
+
+### 5. Install Dependencies
+
+```bash
+npm install
+```
+
+### 6. Run Migrations
+
+Use Drizzle ORM for migrations:
+
+```bash
+npm run migrate
+```
+
+### 7. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App should now be running at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 8. Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Unit Tests:** Run with Jest and React-testing-library.
 
-## Learn More
+```bash
+npm run test
+```
 
-To learn more about Next.js, take a look at the following resources:
+- **End-to-End Tests:** Use Cypress.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run cypress
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 9. Storybook
 
-## Deploy on Vercel
+To run Storybook for UI component testing:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run storybook
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 10. Deployment
+
+For deployment, you can set up CI/CD with GitHub Actions by configuring the `.github/workflows/ci.yml` file.
